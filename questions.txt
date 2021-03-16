@@ -1,0 +1,10 @@
+Show instructor with 2nd max sal in instructor relation. 
+Show avg sal of instructors.
+Show how many instructors having sal less than avg sal. 
+Show how many student belongs to comp. Science dept.
+Show how many distinct dept are there in student rel.
+Increase budget by 10% which is having budget less then avg budget.
+FIND TOTAL BUDGET OF EACH DEPARTMENT.
+FIND AVG STRING LENGTH OF STUDENT NAME.
+SHOW MIN SAL IN INSTRUCTOR RELATION.
+SHOW 3RD MIN SAL IN INSTRUCTOR RELATION.

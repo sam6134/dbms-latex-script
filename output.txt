@@ -1,0 +1,146 @@
+\item{\textbf{Show instructor with 2nd max sal in instructor relation. }
+\\
+\\
+\textbf{Command - }
+\begin{lstlisting}[language=SQL]
+SELECT * 
+FROM instructor 
+WHERE SAL = (
+    SELECT MAX(SAL) 
+    FROM instructor 
+    WHERE SAL < ( 
+        SELECT MAX(SAL) FROM instructor 
+        ) 
+    );
+\end{lstlisting}
+Result-
+\begin{figure}[h]
+\advance\leftskip 0.8cm
+\includegraphics[scale=0.4]{figures/s1.png}
+\end{figure}}
+\item{\textbf{Show avg sal of instructors.}
+\\
+\\
+\textbf{Command - }
+\begin{lstlisting}[language=SQL]
+SELECT AVG(SAL) AS Average_Salary
+FROM instructor;
+\end{lstlisting}
+Result-
+\begin{figure}[h]
+\advance\leftskip 0.8cm
+\includegraphics[scale=0.4]{figures/s2.png}
+\end{figure}}
+\item{\textbf{Show how many instructors having sal less than avg sal. }
+\\
+\\
+\textbf{Command - }
+\begin{lstlisting}[language=SQL]
+SELECT COUNT( INST_ID ) AS count_instructor 
+FROM instructor 
+WHERE SAL < (SELECT AVG(SAL) FROM instructor);
+\end{lstlisting}
+Result-
+\begin{figure}[h]
+\advance\leftskip 0.8cm
+\includegraphics[scale=0.4]{figures/s3.png}
+\end{figure}}
+\item{\textbf{Show how many student belongs to comp. Science dept.}
+\\
+\\
+\textbf{Command - }
+\begin{lstlisting}[language=SQL]
+SELECT COUNT(S_ID) AS count_students
+FROM student
+WHERE D_NAME = 'Comp. Sci.';
+\end{lstlisting}
+Result-
+\begin{figure}[h]
+\advance\leftskip 0.8cm
+\includegraphics[scale=0.4]{figures/s4.png}
+\end{figure}}
+\item{\textbf{Show how many distinct dept are there in student rel.}
+\\
+\\
+\textbf{Command - }
+\begin{lstlisting}[language=SQL]
+SELECT COUNT( DISTINCT D_NAME ) AS distinct_departments
+FROM student;
+\end{lstlisting}
+Result-
+\begin{figure}[h]
+\advance\leftskip 0.8cm
+\includegraphics[scale=0.4]{figures/s5.png}
+\end{figure}}
+\item{\textbf{Increase budget by 10% which is having budget less then avg budget.}
+\\
+\\
+\textbf{Command - }
+\begin{lstlisting}[language=SQL]
+UPDATE department
+SET BUDGET = 1.1*BUDGET
+WHERE BUDGET < (SELECT AVG(BUDGET) FROM department);
+\end{lstlisting}
+Result-
+\begin{figure}[h]
+\advance\leftskip 0.8cm
+\includegraphics[scale=0.4]{figures/s6.png}
+\end{figure}}
+\item{\textbf{FIND TOTAL BUDGET OF EACH DEPARTMENT.}
+\\
+\\
+\textbf{Command - }
+\begin{lstlisting}[language=SQL]
+SELECT SUM(BUDGET)
+FROM department;
+\end{lstlisting}
+Result-
+\begin{figure}[h]
+\advance\leftskip 0.8cm
+\includegraphics[scale=0.4]{figures/s7.png}
+\end{figure}}
+\item{\textbf{FIND AVG STRING LENGTH OF STUDENT NAME.}
+\\
+\\
+\textbf{Command - }
+\begin{lstlisting}[language=SQL]
+SELECT AVG(LENGTH(S_NAME)) AS avg_length 
+FROM student;
+\end{lstlisting}
+Result-
+\begin{figure}[h]
+\advance\leftskip 0.8cm
+\includegraphics[scale=0.4]{figures/s8.png}
+\end{figure}}
+\item{\textbf{SHOW MIN SAL IN INSTRUCTOR RELATION.}
+\\
+\\
+\textbf{Command - }
+\begin{lstlisting}[language=SQL]
+SELECT MIN(SAL) as min_salary
+FROM instructor;
+\end{lstlisting}
+Result-
+\begin{figure}[h]
+\advance\leftskip 0.8cm
+\includegraphics[scale=0.4]{figures/s9.png}
+\end{figure}}
+\item{\textbf{SHOW 3RD MIN SAL IN INSTRUCTOR RELATION.}
+\\
+\\
+\textbf{Command - }
+\begin{lstlisting}[language=SQL]
+ SELECT MIN(SAL) as third_min 
+ FROM instructor WHERE SAL >  (
+     SELECT MIN(SAL) as second_min 
+     FROM instructor WHERE SAL > (
+         SELECT MIN(SAL) AS min_sal 
+         FROM instructor
+        )
+    );
+\end{lstlisting}
+Result-
+\begin{figure}[h]
+\advance\leftskip 0.8cm
+\includegraphics[scale=0.4]{figures/s10.png}
+\end{figure}}
