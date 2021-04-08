@@ -1,10 +1,10 @@
-Show instructor with 2nd max sal in instructor relation. 
-Show avg sal of instructors.
-Show how many instructors having sal less than avg sal. 
-Show how many student belongs to comp. Science dept.
-Show how many distinct dept are there in student rel.
-Increase budget by 10% which is having budget less then avg budget.
-FIND TOTAL BUDGET OF EACH DEPARTMENT.
-FIND AVG STRING LENGTH OF STUDENT NAME.
-SHOW MIN SAL IN INSTRUCTOR RELATION.
-SHOW 3RD MIN SAL IN INSTRUCTOR RELATION.
+Show the Student name and department name of the student having grade =4.
+Show the Student name and department name of the student having highest grade.
+Show the Student name and department name of the student having lowest grade.
+Show the inst name department name where building name =taylor
+Show the Course id, title, department name where Department budget is greater than avg(budget).
+Set grade=10 where section Id=1, semester=fall and year=2009 for student named “Williams”.
+Show the cid, secID, sem and grade for the student name=”zhang”
+Show third largest budget in department relation using subquery.
+Show the inst id, cid,sec id and sem for the inst sal=92000.
+Show third smallest sal in inst. relation using subquery.

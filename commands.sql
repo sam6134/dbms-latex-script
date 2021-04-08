@@ -1,45 +1,91 @@
-SELECT * 
-FROM instructor 
-WHERE SAL = (
-    SELECT MAX(SAL) 
-    FROM instructor 
-    WHERE SAL < ( 
-        SELECT MAX(SAL) FROM instructor 
-        ) 
+SELECT S_NAME, D_NAME
+FROM student
+WHERE S_ID IN ( 
+    SELECT S_ID 
+    FROM takes 
+    WHERE GRADE=4);$
+
+SELECT S_NAME, D_NAME 
+FROM student 
+WHERE S_ID IN (
+    SELECT S_ID 
+    FROM takes
+    WHERE GRADE=(
+        SELECT MAX(GRADE) 
+        FROM takes)
     );$
 
-SELECT AVG(SAL) AS Average_Salary
-FROM instructor;$
+SELECT S_NAME, D_NAME 
+FROM student 
+WHERE S_ID IN (
+    SELECT S_ID
+    FROM takes
+    WHERE GRADE=(
+        SELECT MIN(GRADE) from takes
+        )
+    );$
 
-SELECT COUNT( INST_ID ) AS count_instructor 
-FROM instructor 
-WHERE SAL < (SELECT AVG(SAL) FROM instructor);$
+SELECT INST_NAME, D_NAME
+FROM instructor
+WHERE D_NAME IN (
+    SELECT D_NAME
+    FROM department 
+    WHERE BUILDING = "Taylor"
+    );$
 
-SELECT COUNT(S_ID) AS count_students
-FROM student
-WHERE D_NAME = 'Comp. Sci.';$
+SELECT C_ID, TITLE, D_NAME 
+FROM course 
+WHERE D_NAME IN (
+    SELECT D_NAME 
+    FROM department 
+    WHERE BUDGET > (
+        SELECT AVG(BUDGET) 
+        FROM department
+        )
+    );$
 
-SELECT COUNT( DISTINCT D_NAME ) AS distinct_departments
-FROM student;$
+UPDATE takes 
+SET GRADE = 10 
+WHERE SEC_ID=1 AND SEM = "Fall" AND YEAR = 2009 AND S_ID IN (
+    SELECT S_ID 
+    FROM student 
+    WHERE S_NAME = "Williams"
+    );$
 
-UPDATE department
-SET BUDGET = 1.1*BUDGET
-WHERE BUDGET < (SELECT AVG(BUDGET) FROM department);$
+SELECT C_ID, SEC_ID, SEM, GRADE
+FROM takes
+WHERE S_ID IN (
+    SELECT S_ID 
+    FROM student 
+    WHERE S_NAME = "Zhang"
+    );$
 
-SELECT SUM(BUDGET)
-FROM department;$
+SELECT MAX(BUDGET) as third_largest
+FROM department
+WHERE BUDGET < (
+    SELECT MAX(BUDGET) AS second_largest
+    FROM department 
+    WHERE BUDGET < (
+        SELECT MAX(BUDGET) 
+        AS largest 
+        FROM department) 
+    ); $
 
-SELECT AVG(LENGTH(S_NAME)) AS avg_length 
-FROM student;$
+SELECT INST_ID, C_ID, SEC_ID, SEM
+FROM teaches
+WHERE INST_ID IN (
+    SELECT INST_ID 
+    FROM instructor 
+    WHERE SAL = 92000
+    );$
 
-SELECT MIN(SAL) as min_salary
-FROM instructor;$
-
- SELECT MIN(SAL) as third_min 
- FROM instructor WHERE SAL >  (
-     SELECT MIN(SAL) as second_min 
-     FROM instructor WHERE SAL > (
-         SELECT MIN(SAL) AS min_sal 
-         FROM instructor
+SELECT MIN(SAL) AS third_smallest
+FROM instructor
+WHERE SAL > (
+    SELECT MIN(SAL) AS  second_smallest 
+    FROM instructor 
+    WHERE SAL> (
+        SELECT MIN(SAL) AS smallest 
+        FROM instructor
         )
     );$
